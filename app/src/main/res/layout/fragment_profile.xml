@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,53 +6,85 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     tools:context="com.aswin.museon.fragments.ProfileFragment"
     android:paddingTop="10dp"
-    android:orientation="vertical">
+    android:id="@+id/baseLayout">
 
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:contentPadding="8dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="3dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                fresco:roundAsCircle="true"
-                fresco:placeholderImage="@drawable/man"
-                android:id="@+id/profilePic"
-                android:layout_margin="10dp"/>
-            <LinearLayout
-                android:layout_centerVertical="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/profilePic"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/username"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/mobile"
-                    android:layout_marginTop="20dp"/>
-            </LinearLayout>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-
-
-
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fileBrowserRecycler"/>
-</LinearLayout>
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentPadding="8dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    fresco:roundAsCircle="true"
+                    fresco:placeholderImage="@drawable/man"
+                    android:id="@+id/profilePic"
+                    android:layout_margin="10dp"/>
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/profilePic"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/username"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mobile"
+                        android:layout_marginTop="20dp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:text="UPLOADS"
+            android:textColor="@android:color/white"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fileBrowserRecycler"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/ic_upload"
+        android:id="@+id/uploadButton"/>
+
+</android.support.design.widget.CoordinatorLayout>

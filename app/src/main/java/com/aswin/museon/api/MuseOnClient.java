@@ -1,6 +1,9 @@
 package com.aswin.museon.api;
 
+import com.aswin.museon.models.ProfileResponse;
+import com.aswin.museon.models.RegisteredUsers;
 import com.aswin.museon.models.SignUpResponse;
+import com.aswin.museon.models.UploadResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -22,4 +25,28 @@ public interface MuseOnClient {
             @Part("mobile") RequestBody mobile,
             @Part MultipartBody.Part file
     );
+
+    @POST("profile")
+    Call<RegisteredUsers> getRegisteredUsers();
+
+
+    @Multipart
+    @POST("profile")
+    Call<ProfileResponse> getProfileDetails(
+            @Part("mobile") RequestBody mobile
+    );
+
+    @Multipart
+    @POST("profile")
+    Call<ResponseBody> getProfileDetailstTest(
+            @Part("mobile") RequestBody mobile
+    );
+
+    @Multipart
+    @POST("upload")
+    Call<UploadResponse> uploadFile(
+            @Part("mobile") RequestBody mobile,
+            @Part MultipartBody.Part file
+    );
+
 }

@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
+    android:layout_height="60dp"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/baseLayout">
 
-    <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
-        android:id="@+id/icon"/>
+        android:id="@+id/contactProfilePic"
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@drawable/man"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toRightOf="@id/contactProfilePic"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:textSize="14sp"
         android:textColor="@android:color/black"
-        android:id="@+id/fileName"/>
+        android:id="@+id/contactName"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"

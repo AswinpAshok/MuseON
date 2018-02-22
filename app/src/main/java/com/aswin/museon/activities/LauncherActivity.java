@@ -12,7 +12,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launcher);
         SharedPreferences preferences=getSharedPreferences("myPrefs",MODE_PRIVATE);
         String username=preferences.getString("username","");
         if(!username.equals("")){

@@ -23,10 +23,10 @@ public class StorageHelper {
         }else {
             path = Environment.getExternalStorageDirectory().toString() + "/" + folderName;
         }
-        Log.d("Files", "Path: " + path);
+//        Log.d("Files", "Path: " + path);
         File directory = new File(path);
         File[] files = directory.listFiles();
-        Log.d("Files", "Size: "+ files.length);
+//        Log.d("Files", "Size: "+ files.length);
         for (int i = 0; i < files.length; i++)
         {
             File file=new File(path+"/"+files[i].getName());
@@ -39,7 +39,7 @@ public class StorageHelper {
             }else {
                 fileList.add(model);
             }
-            Log.d("Files", "FileName:" + files[i].getName()+" "+isDirectory);
+//            Log.d("Files", "FileName:" + files[i].getName()+" "+isDirectory);
         }
         folderList.addAll(fileList);
         return folderList;

@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,8 @@ public class SignUpActivity extends AppCompatActivity implements Constants {
     private Uri profilePicUri;
     private SharedPreferences preferences;
     private String uname,umobile;
+    private Snackbar waitSnackbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,11 @@ public class SignUpActivity extends AppCompatActivity implements Constants {
         signupButton=findViewById(R.id.signUpButton);
         baseLayout=findViewById(R.id.baseLayout);
         preferences=getSharedPreferences("myPrefs",MODE_PRIVATE);
+        waitSnackbar=Snackbar.make(baseLayout,"Please wait...",Snackbar.LENGTH_INDEFINITE);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
 
         profilePicLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +140,8 @@ public class SignUpActivity extends AppCompatActivity implements Constants {
 
     private void startRegistration(final String username, String mobile) {
 
+        waitSnackbar.show();
+        signupButton.setEnabled(false);
         MediaType mediaType=MediaType.parse("image/*");
 
         Retrofit.Builder builder=new Retrofit.Builder()
@@ -162,21 +172,30 @@ public class SignUpActivity extends AppCompatActivity implements Constants {
         call.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                    String msg=response.body().getMsg();
-                    if(msg.equals("Client Successfully Registered!")) {
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("username", uname);
-                        editor.putString("mobile", umobile);
-                        editor.putString("profilePic", profilePicUri.getPath());
-                        editor.apply();
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                waitSnackbar.dismiss();
+                String msg=response.body().getMsg();
+                if(msg.equals("Client Successfully Registered!")) {
+
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("username", uname);
+                    editor.putString("mobile", umobile);
+                    editor.putString("profilePic", profilePicUri.getPath());
+                    editor.apply();
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    waitSnackbar.dismiss();
+                    signupButton.setEnabled(true);
+                    Snackbar.make(baseLayout,"Something went wrong.. ",Snackbar.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                Log.d("######", "onFailure: failed");
+                waitSnackbar.dismiss();
+                signupButton.setEnabled(true);
+                Snackbar.make(baseLayout,"Something went wrong.. ",Snackbar.LENGTH_SHORT).show();
             }
         });
 
